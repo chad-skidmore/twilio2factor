@@ -31,8 +31,7 @@ twilio2factor is a small and simple project used as an initial proof of concept 
 
 * Grab the appropriate mongoDB for your environment at http://www.mongodb.org/downloads and install as directed on the mongoDB site
 * Install node.js and npm as documented at https://github.com/joyent/node/wiki/Installation
-* Add the dependancies
-     npm install express less mersenne bcrypt mongoose node-uuid twilio zoneinfo
+* Add the dependancies ```npm install express less mersenne bcrypt mongoose node-uuid twilio zoneinfo```
 * Get your free Twilio developer account at http://www.twilio.com/
 * Edit the config.js file with your Twilio information, hostname, and phone number
 * Launch the app and have fun
