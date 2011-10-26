@@ -1,0 +1,60 @@
+div.page-header
+div.row
+	div.span4.columns
+	div.span8.columns
+		div.well
+			form#register.form-stacked(action='/register', name='register', method='post')
+				fieldset
+				input(type='hidden', name='form[usingAJAX]', value='false')
+				h1 Register a User
+				div.clearfix
+					label(for='invite_code') Invite Code:
+					div.input
+						input#invite_code(class='text validate[required]', name='user[invite_code]', type='text')
+
+				div.clearfix
+					label(for='firstname') First Name:
+					div.input
+						input#firstname(class='text validate[required]', name='user[firstname]', type='text')
+			
+				div.clearfix
+					label(for='lastname') Last Name:
+					div.input
+						input#lastname(class='text validate[required]', name='user[lastname]', type='text')
+
+				div.clearfix
+					label(for='email') Email:
+					div.input
+						input#email(class='text validate[required,custom[email],ajax[ajaxEmailAvailable]]', name='user[email]', type='text')
+						
+				div.clearfix
+					label(for='phone') Mobile Phone:
+					div.input
+						input#email(class='text validate[required,custom[email],ajax[ajaxEmailAvailable]]', name='user[phone]', type='text')
+			
+				div.clearfix
+					label(for='password') Password:
+					div.input
+						input#password(class='text validate[required]', name='user[password]', type='password')
+			
+				div.clearfix
+					label(for='confirm_password') Confirm Password:
+					div.input
+						input#confirm_password(class='text validate[required,equals[password]]', name='confirm_password', type='password')
+			
+				div.clearfix
+					label(for='tz') Timezone:
+					div.input
+							select#tz.text(name='user[tz]')
+								option(value='US/Alaska') US/Alaska
+								option(value='US/Arizona') US/Arizona
+								option(value='US/Central') US/Central
+								option(value='US/Eastern') US/Eastern
+								option(value='US/Hawaii') US/Hawaii
+								option(value='US/Mountain') US/Mountain
+								option(selected='selected', value='US/Pacific') US/Pacific
+			
+				button.btn.primary(type='submit') Register
+			div#alert.alert-message.error
+				a.close(href='#') &times;
+				p Username or password is incorrect! Please try again.

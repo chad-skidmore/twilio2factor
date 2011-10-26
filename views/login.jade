@@ -1,0 +1,170 @@
+div.page-header
+div.row
+	div.span4.columns
+	div.span8.columns
+		div.well
+			form#login.form-stacked(action='/login', name='login', method='post')
+				fieldset
+					input#authmode(type='hidden', name='form[authmode]', value='none')
+					h1 Login
+					div.clearfix
+						label(for='email') Email Address:
+						div.input
+							input#email.xlarge(name='user[email]', type='text', size='30')
+
+					div.clearfix
+						label(for='password') Password:
+						div.input
+							input#password.xlarge(name='user[password]', type='password', size='30')
+		
+					div.clearfix.hideshow
+						label(for='key') Auth Key:
+						div.input
+							input#key.xlarge(name='user[key]', type='text', size='30')
+					
+					div.clearfix
+						label#btnlabel Authorize By:
+						button#sms.btn.primary(type='button') SMS
+						button#voice.btn.primary(type='button') Voice
+						button#loginbtn.btn.primary-green(type='button') Login
+						p
+							a(href='/login') Reset Login
+						
+			div#alert.alert-message.error
+				a.close(href='#') &times;
+				p.message-text Username or password is incorrect! Please try again.
+
+script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+script
+	//(function($) {
+	$(document).ready(function(){
+		$('#email').focus();
+		
+		$('.close').click(function() {
+			$('#alert').fadeOut('slow');
+		});
+		
+		$('#sms').click(function() {
+			console.log('clicked sms');
+			$('#authmode').val('sms');
+			formsubmit('sms');
+		});
+		
+		$('#voice').click(function() {
+			console.log('clicked voice');
+			$('#authmode').val('voice');
+			formsubmit('voice');
+		});
+		
+		$('#loginbtn').click(function() {
+			console.log('clicked login');
+			formsubmit('login');
+		})
+		
+		function formsubmit(mode) {
+			// *************
+			// Interaction with backend via AJAX
+			// to control the Auth Key field, login
+			// button, and the URL to be posted to
+			// *************
+
+			var $this = $('#login');
+			var url = $this.attr('action');
+			var dataToSend = $this.serialize();
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: dataToSend,
+				dataType: 'json',
+				success: function(dataReceived) {
+					// Look at the JSON data received from the server
+					// to determine what UI changes to make or where
+					// to redirect to
+					if (dataReceived.status == 'ok') {
+						// If we get an ok then it means we posted a valid
+						// username and password so we'll hide any error alert
+						// messages and show the Auth Key field
+						
+						// first we'll set the url for the form submittal
+						$this.attr('action',dataReceived.url);
+						
+						// show the authkey field
+						var hideshowdisplay = $('.hideshow').css('display');
+						if (hideshowdisplay == 'none') {
+							$('.hideshow').animate({
+								opacity: 'toggle',
+								height: 'toggle'
+							}, 'slow');	
+						}
+						
+						// change the button to green and the lable to login
+						// $('.btn').removeClass('primary');
+						// $('.btn').addClass('primary-green');
+						// $('.btn').text('Login');
+						// $('#key').val('');
+						$('#btnlabel').fadeOut('fast');
+						$('#sms').slideUp('fast');
+						$('#voice').slideUp('fast');
+						$('#loginbtn').slideDown('fast');
+						
+						// hide any error messages that may have been present
+						hideshowdisplay = $('#alert').css('display');
+						if (hideshowdisplay != 'none') {
+							$('#alert').fadeOut('slow');
+						}
+						// set focus to the auth key field
+						$('#key').focus();
+					} else if (dataReceived.status == 'error') {
+						// We got an error of some kind from the server.
+						
+						// firt we'll reset the auth key value to nothing
+						
+						
+						// Check to see if we need to reset back to the initial
+						// login form state without auth key
+						if (dataReceived.action == 'reset') {
+							$('#key').val('');
+							$('#email').focus();
+							$this.attr('action',dataReceived.url);
+							$('.btn').removeClass('primary-green');
+							$('.btn').addClass('primary');
+							$('.btn').text('Send Authorization Key');
+							var hideshowdisplay = $('.hideshow').css('display');
+							if (hideshowdisplay != 'none') {
+								$('.hideshow').animate({
+									opacity: 'toggle',
+									height: 'toggle'
+								}, 'slow');	
+							}	
+						} else {
+							// if the authkey is visible then we'll put focus back to it
+							// and clear it
+							if ($('.hideshow').css('display') != 'none') {
+								$('#key').val('');
+								$('#key').focus();
+							} else{
+								// if authkey isn't visible then we'll just move the focus
+								// back to the email field and clear both email and password
+								$('#email').val('');
+								$('#password').val('');
+								$('#email').focus();
+							}	
+						}
+						
+						// set the error message text and display it
+						$('p.message-text').text(dataReceived.message);
+						hideshowdisplay = $('#alert').css('display');
+						if (hideshowdisplay == 'none') {
+							$('#alert').fadeIn('slow');
+						}
+					} else if (dataReceived.status == 'redirect') {
+						window.location.replace(dataReceived.url);
+					}
+				}
+			});	
+		}
+	});
+	//})(jQuery);
+	
+	

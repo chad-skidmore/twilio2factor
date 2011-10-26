@@ -1,0 +1,8 @@
+div.page-header
+div.row
+	div.span4.columns
+	div.span8.columns
+		h1=title
+		p Welcome #{currentUser.firstname}, to the super secret page
+		p Logged in as #{currentUser.email}
+		a(href='/logout') Logout

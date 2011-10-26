@@ -1,0 +1,19 @@
+{
+    "name": "twilio2factor"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.4.3"
+    , "jade": ">= 0.0.1"
+	, "less": ">= 1.1.4"
+	, "mersenne": ">= 0.0.3"
+	, "bcrypt": ">= 0.2.4"
+	, "mongodb": ">= 0.9.6-22"
+	, "mongoose": ">= 2.2.1"
+	, "node-uuid": ">= 1.2.0"
+	, "twilio": ">= 0.4.0"
+	, "zoneinfo": ">= 0.1.5"
+	, "connect-mongo": ">= 0.1.5"
+	, "connect-mongodb": ">= 1.0.0"
+  }
+}

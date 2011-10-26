@@ -1,0 +1,63 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/* Create a bordered box for the form */
+form.login {
+	background-color:#eee;
+	width:300px;
+	padding:10px 20px;
+	border:5px solid #ddd;
+}
+ 
+/* Set the font for all of the elements */
+form.login,
+form.login input,
+form.login button {
+	font-family: Helvetica, Arial;
+	font-size:18px;
+}
+ 
+/* Make our title a bit bigger */
+form.login div.title {
+	font-size:24px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+ 
+/* Remove the bullets and padding from our list */
+form.login ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+ 
+/* Give our input fields a fixed width and a bit of padding */
+form.login input {
+	width:280px;
+	padding:5px;
+	margin-bottom:10px;
+}
+
+/* Make each field container relative.
+This lets us position the label absolutely inside it. */
+form.login ul li {
+	position:relative;
+}
+ 
+/* Position the labels inside our input fields. */
+form.login label {
+	position:absolute;
+	top:8px;
+	left:9px;
+	color:#aaa;
+}
+
+li.box {
+	display: none;
+}
