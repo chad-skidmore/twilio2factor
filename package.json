@@ -1,9 +1,9 @@
 {
     "name": "twilio2factor"
-  , "version": "0.0.1"
+  , "version": "0.0.2"
   , "private": true
   , "dependencies": {
-      "express": "2.4.3"
+      "express": ">= 2.4.3"
     , "jade": ">= 0.0.1"
 	, "less": ">= 1.1.4"
 	, "mersenne": ">= 0.0.3"

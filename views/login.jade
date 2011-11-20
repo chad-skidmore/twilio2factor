@@ -34,9 +34,8 @@ div.row
 				a.close(href='#') &times;
 				p.message-text Username or password is incorrect! Please try again.
 
-script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js')
 script
-	//(function($) {
 	$(document).ready(function(){
 		$('#email').focus();
 		
@@ -118,7 +117,7 @@ script
 					} else if (dataReceived.status == 'error') {
 						// We got an error of some kind from the server.
 						
-						// firt we'll reset the auth key value to nothing
+						// first we'll reset the auth key value to nothing
 						
 						
 						// Check to see if we need to reset back to the initial
@@ -165,6 +164,4 @@ script
 			});	
 		}
 	});
-	//})(jQuery);
-	
 	
